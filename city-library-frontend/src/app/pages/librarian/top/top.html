@@ -1,0 +1,76 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Library 2025 Stats:</h1>
+
+  <div *ngIf="loading">Loading...</div>
+
+  <div *ngIf="!loading">
+    <!-- Branch Selector -->
+    <label class="font-semibold mr-2">Select Branch:</label>
+    <select [(ngModel)]="selectedBranch" class="border p-2 rounded mb-6">
+      <option *ngFor="let b of stats.branches" [value]="b.BranchID">
+        {{ b.BranchID }} ({{ b.Address }})
+      </option>
+    </select>
+
+    <!-- ============================== -->
+    <!--   ROW 1 : 2 COLUMNS SIDE BY SIDE   -->
+    <!-- ============================== -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Top Borrowers -->
+      <div class="bg-white shadow rounded-lg p-4 w-full">
+        <h2 class="text-lg font-semibold mb-2">Top Borrowers — Branch {{ selectedBranch }}</h2>
+
+        <table class="border border-collapse w-full text-sm">
+          <tr>
+            <th class="border p-2">Name</th>
+            <th class="border p-2">Books Borrowed</th>
+          </tr>
+          <tr *ngFor="let b of stats.topBorrowers[selectedBranch]">
+            <td class="border p-2">{{ b.name }}</td>
+            <td class="border p-2 text-center">{{ b.total_borrowed }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Top Borrowed Books by Branch -->
+      <div class="bg-white shadow rounded-lg p-4 w-full">
+        <h2 class="text-lg font-semibold mb-2">Top Books — Branch {{ selectedBranch }}</h2>
+
+        <table class="border border-collapse w-full text-sm">
+          <tr>
+            <th class="border p-2">Title</th>
+          </tr>
+          <tr *ngFor="let b of stats.topBooksBranch[selectedBranch]">
+            <td class="border p-2">{{ b.Title }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!--   ROW 2 : 2 COLUMNS SIDE BY SIDE   -->
+    <!-- ============================== -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+      <!-- Top Books of the Year -->
+      <div class="bg-white shadow rounded-lg p-4 w-full">
+        <h2 class="text-lg font-semibold mb-2">Top 10 Books of {{ currentYear }}</h2>
+
+        <table class="border border-collapse w-full text-sm">
+          <tr>
+            <th class="border p-2">Title</th>
+          </tr>
+          <tr *ngFor="let b of stats.topBooksYear">
+            <td class="border p-2">{{ b.Title }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Average Fine -->
+      <div class="bg-white shadow rounded-lg p-4 w-full">
+        <h2 class="text-lg font-semibold mb-2">Average Fine per Member</h2>
+
+        <p class="text-3xl font-bold text-blue-800">${{ stats.averageFine | number : '1.2-2' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

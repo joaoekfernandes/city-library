@@ -1,0 +1,50 @@
+<div class="flex flex-col gap-4 max-w-md mx-auto">
+  <h1 class="font-bold text-2xl">Sign Up to have access to the library features!</h1>
+  <form (ngSubmit)="signUp()" class="flex flex-col gap-6">
+    <input
+      class="border max-w-sm h-8 py-4 pl-2 rounded-md"
+      type="text"
+      placeholder="First Name"
+      [(ngModel)]="user.firstname"
+      name="firstname"
+      required
+    />
+    <input
+      class="border max-w-sm h-8 py-4 pl-2 rounded-md"
+      type="text"
+      placeholder="Last Name"
+      [(ngModel)]="user.lastname"
+      name="lastname"
+      required
+    />
+    <input
+      type="email"
+      placeholder="Email"
+      class="border max-w-sm h-8 py-4 pl-2 rounded-md"
+      [(ngModel)]="user.email"
+      name="email"
+      required
+    />
+    <input
+      type="text"
+      class="border max-w-sm h-8 py-4 pl-2 rounded-md"
+      placeholder="Phone"
+      [(ngModel)]="user.phone"
+      name="phone"
+    />
+    <input
+      class="border max-w-sm h-8 py-4 pl-2 rounded-md"
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="user.password"
+      name="password"
+      required
+    />
+    <button
+      type="submit"
+      class="bg-gray-300 max-w-sm h-8 hover:scale-105 cursor-pointer transition rounded-lg"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>

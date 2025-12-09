@@ -1,0 +1,125 @@
+<nav class="fixed inset-y-0 left-0 w-64 bg-[#1b263b] text-white flex flex-col p-5 shadow-xl">
+  <!-- Logo + Name -->
+  <div class="flex items-center gap-3 mb-8">
+    <img src="assets/logo.jpg" class="w-10 h-10 rounded-full object-cover" alt="logo" />
+    <span class="text-xl font-bold tracking-widest">CITY LIBRARY</span>
+  </div>
+
+  <!-- Member Navigation -->
+  <div *ngIf="role === 'member'" class="flex flex-col gap-1 text-sm">
+    <span class="text-gray-400">Home</span>
+    <a
+      routerLink="/member/dashboard"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Dashboard
+    </a>
+
+    <span class="text-gray-400 mt-2">Books</span>
+
+    <a
+      routerLink="/member/catalogue"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Catalogue
+    </a>
+
+    <span class="text-gray-400 mt-2">Personal Info</span>
+
+    <a
+      routerLink="/member/loans"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      My Loans
+    </a>
+
+    <a
+      routerLink="/member/profile"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      My Profile
+    </a>
+  </div>
+
+  <!-- Librarian Navigation -->
+  <div *ngIf="role === 'librarian'" class="flex flex-col gap-1 text-sm">
+    <span class="text-gray-400">Home</span>
+    <a
+      routerLink="/librarian/dashboard"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Dashboard
+    </a>
+
+    <span class="text-gray-400 mt-2">Documents</span>
+    <a
+      routerLink="/librarian/manage"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Manage Documents
+    </a>
+    <a
+      routerLink="/librarian/search-copy"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Search Copy
+    </a>
+    <span class="text-gray-400 mt-2">Members</span>
+    <a
+      routerLink="/librarian/members"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Members
+    </a>
+    <a
+      routerLink="/librarian/loans"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Active Loans
+    </a>
+    <a
+      routerLink="/librarian/historico"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Loan Records
+    </a>
+
+    <span class="text-gray-400 mt-2">Branches</span>
+    <a
+      routerLink="/librarian/branches"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Add Branch
+    </a>
+
+    <span class="text-gray-400 mt-2">Library Wrapped</span>
+    <a
+      routerLink="/librarian/top"
+      routerLinkActive="bg-white/5 font-semibold"
+      class="px-4 py-2 rounded-md hover:bg-white/5 transition"
+    >
+      Top Stats
+    </a>
+  </div>
+
+  <!-- Logout button at the bottom -->
+  <div class="mt-auto pt-6">
+    <button
+      (click)="logout()"
+      class="w-full bg-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
+    >
+      Logout
+    </button>
+  </div>
+</nav>

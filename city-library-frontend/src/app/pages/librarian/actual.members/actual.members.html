@@ -1,0 +1,135 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Library Members</h1>
+
+  <div>
+    <h2 class="font-bold text-gray-500">Options:</h2>
+    <p class="text-gray-400">Click on the name to see more information:</p>
+    <p class="text-gray-400">Select a Branch to change the user's current branch</p>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-gray-500">Loading members...</div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="text-red-600 font-semibold">{{ error }}</div>
+
+  <div class="grid grid-cols-2 gap-6 mt-6 text-center">
+    <!-- Branch 1 Table -->
+    <div>
+      <h2 class="text-xl font-bold mb-4">Branch 1 Members</h2>
+
+      <table *ngIf="branch1Members.length > 0" class="min-w-full border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="p-2 border">Member</th>
+            <th class="p-2 border">Branch</th>
+            <th class="p-2 border">Pending Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of branch1Members">
+            <td
+              class="p-2 border text-center cursor-pointer hover:bg-gray-100"
+              (click)="showMemberCard(m)"
+            >
+              {{ m.firstName }} {{ m.lastName }}
+            </td>
+
+            <td class="p-2 border text-center">
+              <select
+                [(ngModel)]="m.BranchID"
+                (change)="updateBranch(m)"
+                class="border rounded p-1"
+              >
+                <option *ngFor="let b of branches" [value]="b.BranchID">
+                  {{ b.Address }}
+                </option>
+              </select>
+            </td>
+            <td
+              class="p-2 border text-center"
+              [ngClass]="{ 'text-red-600': m.fine > 0, 'text-green-600': m.fine == 0 }"
+            >
+              ${{ m.fine }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p *ngIf="branch1Members.length == 0" class="text-gray-500">No members in Branch 1.</p>
+    </div>
+
+    <!-- Branch 2 Table -->
+    <div>
+      <h2 class="text-xl font-bold mb-4">Branch 2 Members</h2>
+
+      <table *ngIf="branch2Members.length > 0" class="min-w-full border border-gray-300">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="p-2 border">Member</th>
+            <th class="p-2 border">Branch</th>
+            <th class="p-2 border">Pending Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of branch2Members">
+            <td
+              class="p-2 border text-center cursor-pointer hover:bg-gray-100"
+              (click)="showMemberCard(m)"
+            >
+              {{ m.firstName }} {{ m.lastName }}
+            </td>
+
+            <td class="p-2 border text-center">
+              <select
+                [(ngModel)]="m.BranchID"
+                (change)="updateBranch(m)"
+                class="border rounded p-1"
+              >
+                <option *ngFor="let b of branches" [value]="b.BranchID">
+                  {{ b.Address }}
+                </option>
+              </select>
+            </td>
+            <td
+              class="p-2 border text-center"
+              [ngClass]="{ 'text-red-600': m.fine > 0, 'text-green-600': m.fine == 0 }"
+            >
+              ${{ m.fine }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Member Info Modal -->
+      <div
+        *ngIf="selectedMember"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      >
+        <div class="bg-white rounded-lg p-6 shadow-xl relative w-80">
+          <!-- Close button -->
+          <button
+            class="absolute top-2 right-2 text-xl font-bold text-gray-500 hover:text-black"
+            (click)="closeMemberCard()"
+          >
+            x
+          </button>
+
+          <!-- Member Info -->
+          <h3 class="text-2xl font-bold mb-4">
+            {{ selectedMember.firstName }} {{ selectedMember.lastName }}
+          </h3>
+          <p><strong>ID:</strong> {{ selectedMember.userid }}</p>
+
+          <p class="mb-2"><strong>Email:</strong> {{ selectedMember.email }}</p>
+          <p><strong>Phone:</strong> {{ selectedMember.phone }}</p>
+        </div>
+      </div>
+
+      <p *ngIf="branch2Members.length == 0" class="text-gray-500">No members in Branch 2.</p>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <p *ngIf="!loading && members.length === 0" class="text-gray-500">No members found.</p>
+</div>

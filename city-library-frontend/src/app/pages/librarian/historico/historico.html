@@ -1,0 +1,83 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Loan Records</h1>
+
+  <!-- Search box -->
+  <div class="mb-4 flex gap-2">
+    <input
+      type="text"
+      class="border rounded p-2 w-64"
+      placeholder="Search member name or ID..."
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
+    />
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="text-red-600">{{ error }}</div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto" *ngIf="!loading">
+    <table class="min-w-full border border-gray-300 shadow-sm">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="p-2 border">Member</th>
+          <th class="p-2 border">Document</th>
+          <th class="p-2 border">Copy #</th>
+          <th class="p-2 border">Borrow</th>
+          <th class="p-2 border">Returned</th>
+          <th class="p-2 border">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let r of pagedRecords">
+          <td class="p-2 border">{{ r.firstName }} {{ r.lastName }} ({{ r.userid }})</td>
+          <td class="p-2 border">{{ r.documentTitle }}</td>
+          <td class="p-2 border">{{ r.CopyNum }}</td>
+          <td class="p-2 border">{{ r.BorrowDate }}</td>
+          <td class="p-2 border">{{ r.ReturnDate || 'Not Returned' }}</td>
+          <td
+            class="p-2 border font-semibold"
+            [ngClass]="{
+              'text-green-600': r.loanStatus === 'Returned On Time',
+              'text-red-600': r.loanStatus === 'Returned Late',
+              'text-yellow-600': r.loanStatus === 'Not Returned'
+            }"
+          >
+            {{ r.loanStatus }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!loading && pagedRecords.length === 0">No loans found.</p>
+
+  <!-- Pagination -->
+  <div class="mt-4 flex gap-2" *ngIf="totalPages > 1">
+    <button
+      class="px-3 py-1 border rounded"
+      (click)="goPage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+    >
+      Prev
+    </button>
+
+    <button
+      *ngFor="let p of pages"
+      class="px-3 py-1 border rounded"
+      (click)="goPage(p)"
+      [class.bg-blue-400]="p === currentPage"
+    >
+      {{ p }}
+    </button>
+
+    <button
+      class="px-3 py-1 border rounded"
+      (click)="goPage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+    >
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div
+  class="fixed inset-0 bg-cover bg-center bg-no-repeat bg-fixed -z-10"
+  style="background-image: url('assets/librarybg.jpg')"
+></div>
+
+<app-navbar
+  *ngIf="isLoggedIn"
+  class="fixed top-0 left-0 h-screen w-64 overflow-y-auto z-20"
+></app-navbar>
+
+<div class="min-h-screen bg-white/60 backdrop-blur-sm flex relative">
+  <!-- Navbar only when logged in -->
+
+  <!-- Main content -->
+  <div class="p-6 w-full" [ngClass]="{ 'ml-64': isLoggedIn }">
+    <div class="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

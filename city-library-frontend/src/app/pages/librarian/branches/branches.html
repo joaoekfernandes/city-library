@@ -1,0 +1,76 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Branches Management</h1>
+
+  <!-- Add Branch -->
+  <div class="mb-6 flex gap-3">
+    <input
+      type="text"
+      [(ngModel)]="newBranchAddress"
+      placeholder="New branch address"
+      class="border px-3 py-2 rounded w-80"
+    />
+    <button
+      (click)="addBranch()"
+      class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+    >
+      Add Branch
+    </button>
+  </div>
+
+  <h1 class="text-gray-500 font-bold mx-auto">Click on a Branch to check more info</h1>
+
+  <!-- Branches Table -->
+  <table class="w-full border-separate border-spacing-y-2">
+    <thead>
+      <tr class="text-left text-sm text-gray-600">
+        <th class="px-4 py-2">Branch ID</th>
+        <th class="px-4 py-2">Address</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let branch of branches"
+        (click)="selectBranch(branch)"
+        class="bg-white hover:bg-gray-50 cursor-pointer shadow-sm"
+      >
+        <td class="px-4 py-2 font-semibold">{{ branch.BranchID }}</td>
+        <td class="px-4 py-2">{{ branch.Address }}</td>
+        <td class="px-4 py-2">
+          <button
+            (click)="deleteBranch(branch.BranchID); $event.stopPropagation()"
+            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Branch Details -->
+  <div *ngIf="selectedBranch" class="mt-10">
+    <h2 class="text-2xl font-bold mb-4">Details for Branch {{ selectedBranch.BranchID }}</h2>
+
+    <!-- Librarians Section -->
+    <h3 class="text-lg font-semibold mb-2">Librarians on this Branch:</h3>
+    <div *ngIf="librarians.length === 0" class="text-gray-500 mb-4">
+      No librarians assigned to this branch.
+    </div>
+    <ul class="list-disc ml-6 mb-6">
+      <li *ngFor="let lib of librarians">
+        {{ lib.firstName }} {{ lib.lastName }} - {{ lib.email }}
+      </li>
+    </ul>
+
+    <!-- Members Section -->
+    <h3 class="text-lg font-semibold mb-2">Members on this Branch:</h3>
+    <div *ngIf="members.length === 0" class="text-gray-500">
+      No members currently using this branch.
+    </div>
+    <ul class="list-disc ml-6">
+      <li *ngFor="let mem of members">{{ mem.firstName }} {{ mem.lastName }} — {{ mem.email }}</li>
+    </ul>
+  </div>
+</div>

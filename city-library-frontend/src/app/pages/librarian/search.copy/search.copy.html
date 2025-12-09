@@ -1,0 +1,62 @@
+<div class="p-6">
+  <h1 class="text-xl font-bold mb-3">
+    Search for the copy you want and click on it to check its availability:
+  </h1>
+
+  <div class="flex gap-2 mb-4">
+    <input
+      [(ngModel)]="search"
+      class="border rounded p-2 w-64"
+      placeholder="Document title..."
+      (input)="searchDocs()"
+    />
+  </div>
+
+  <!-- Found Documents -->
+  <div *ngIf="results.length">
+    <h2 class="font-semibold mb-2">Results</h2>
+
+    <div
+      *ngFor="let r of results"
+      (click)="select(r)"
+      class="border rounded p-2 mb-1 cursor-pointer hover:bg-gray-100"
+    >
+      {{ r.Title }}
+    </div>
+  </div>
+
+  <!-- Copy Status -->
+  <div *ngIf="copies.length" class="mt-6">
+    <h2 class="font-semibold mb-2">Copies</h2>
+
+    <table class="border-collapse border">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border p-2">Copy #</th>
+          <th class="border p-2">Status</th>
+          <th class="border p-2">Borrowed By</th>
+          <th class="border p-2">Borrow Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of copies">
+          <td class="border p-2">{{ c.CopyNum }}</td>
+
+          <td
+            class="border p-2"
+            [ngClass]="{
+              'text-green-600': c.status === 'Available',
+              'text-red-600': c.status === 'Borrowed'
+            }"
+          >
+            {{ c.status }}
+          </td>
+
+          <td class="border p-2">{{ c.borrower || '-' }}</td>
+          <td class="border p-2">{{ c.BorrowDate || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

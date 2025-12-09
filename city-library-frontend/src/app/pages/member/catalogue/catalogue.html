@@ -1,0 +1,140 @@
+<div class="p-6 max-w-6xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">Library Catalogue</h1>
+
+  <!-- Search -->
+  <div class="mb-6 flex gap-2">
+    <input
+      type="text"
+      placeholder="Search by title, author, or publisher"
+      [(ngModel)]="searchText"
+      (input)="onSearch()"
+      class="flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:border-blue-500"
+    />
+    <button (click)="onSearch()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Search
+    </button>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+    {{ error }}
+  </div>
+
+  <!-- FIXED HEIGHT WRAPPER -->
+  <div class="min-h-[850px] relative">
+    <!-- Skeleton Loader (shows while loading but keeps height fixed) -->
+    <div
+      *ngIf="loading"
+      class="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <div
+        *ngFor="let n of [].constructor(pageSize)"
+        class="animate-pulse bg-gray-200 h-80 rounded-lg"
+      ></div>
+    </div>
+
+    <!-- Book Grid -->
+    <div
+      *ngIf="!loading && books.length > 0"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <div
+        *ngFor="let book of books"
+        class="bg-white shadow rounded-lg p-4 flex flex-col hover:shadow-lg transition"
+      >
+        <!-- Cover -->
+        <div
+          class="w-full h-60 bg-white rounded mb-3 flex items-center justify-center overflow-hidden"
+        >
+          <img
+            *ngIf="book.coverURL"
+            [src]="book.coverURL"
+            class="max-w-full max-h-full object-contain bg-white rounded mb-3"
+          />
+
+          <div
+            *ngIf="!book.coverURL"
+            class="w-full h-48 bg-white border rounded mb-3 flex justify-center items-center"
+          >
+            No cover
+          </div>
+        </div>
+
+        <!-- Title -->
+        <h2 class="text-lg font-bold text-gray-800 mb-1">
+          {{ book.Title }}
+        </h2>
+
+        <!-- Author -->
+        <p class="text-gray-600 text-sm mb-1">
+          Author: <span class="font-medium">{{ book.Author }}</span>
+        </p>
+
+        <!-- Publisher -->
+        <p class="text-gray-600 text-sm mb-1">
+          Publisher: <span class="font-medium">{{ book.Publisher }}</span>
+        </p>
+
+        <!-- Availability -->
+        <p
+          class="text-sm font-semibold mb-3"
+          [ngClass]="{
+            'text-green-600': book.available > 0,
+            'text-red-500': book.available === 0
+          }"
+        >
+          Availability: {{ book.available }}
+        </p>
+
+        <!-- Borrow Button -->
+        <button
+          (click)="borrowBook(book.DocID)"
+          [disabled]="book.available === 0"
+          class="mt-auto bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+        >
+          Borrow
+        </button>
+      </div>
+    </div>
+
+    <!-- No results -->
+    <div
+      *ngIf="!loading && books.length === 0"
+      class="text-gray-500 py-6 text-center absolute inset-0 flex items-center justify-center"
+    >
+      No books found.
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div *ngIf="totalPages > 1" class="mt-4 flex justify-center items-center gap-2 text-sm">
+    <button
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+      class="px-3 py-1 rounded border hover:bg-gray-100 disabled:opacity-50"
+    >
+      Prev
+    </button>
+
+    <ng-container *ngFor="let page of [].constructor(totalPages); let i = index">
+      <button
+        (click)="goToPage(i + 1)"
+        [ngClass]="{
+          'bg-blue-600 text-white': currentPage === i + 1,
+          'bg-white text-gray-700': currentPage !== i + 1
+        }"
+        class="px-3 py-1 rounded border hover:bg-gray-100"
+      >
+        {{ i * pageSize + 1 }}-{{ (i + 1) * pageSize }}
+      </button>
+    </ng-container>
+
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+      class="px-3 py-1 rounded border hover:bg-gray-100 disabled:opacity-50"
+    >
+      Next
+    </button>
+  </div>
+</div>

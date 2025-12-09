@@ -1,0 +1,149 @@
+<div class="p-6 max-w-7xl mx-auto space-y-10">
+  <!-- 🌟 Hero Section -->
+
+  <div class="relative rounded-2xl overflow-hidden shadow-lg">
+    <img src="assets/lib.jpg" class="w-full h-64 object-cover opacity-80" alt="lib banner" />
+
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/20 flex flex-col justify-center p-10"
+    >
+      <h1 class="text-4xl font-extrabold text-white">
+        Welcome back, {{ member?.firstname }} {{ member?.lastname }} 👋
+      </h1>
+
+      <p class="mt-2 text-gray-200 text-lg">
+        Your digital portal to the City Library — explore, borrow, and manage your items.
+      </p>
+    </div>
+  </div>
+
+  <!-- review cards -->
+  <div class="relative overflow-hidden">
+    <div class="flex animate-marquee gap-6">
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/verde.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="Emma Thompson"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Somon Nekushoev</h3>
+            <p class="text-gray-500 text-sm">@nek_somon</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">
+          The Harry Potter books are simply amazing. Nothing else to say.
+        </p>
+      </div>
+
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/amarelo.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="David Park"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Grisha Tigranyan</h3>
+            <p class="text-gray-500 text-sm">@tig_grisha</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">
+          The Notebook is really worth it. I prefer reading the book 1000 times than watching the
+          movie...
+        </p>
+      </div>
+
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/agua.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="Sofia Rodriguez"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Felipe Moraes</h3>
+            <p class="text-gray-500 text-sm">@moraes_felipe</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">
+          I was able to borrow all the books I needed for my classes this semester. It looks like
+          this library has all possible books ahahahhaha!
+        </p>
+      </div>
+
+      <!-- Duplicate to make marquee loop -->
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/verde.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="Emma Thompson"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Somon Nekushoev</h3>
+            <p class="text-gray-500 text-sm">@nek_somon</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">GOT books are simply amazing. Nothing else to say.</p>
+      </div>
+
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/amarelo.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="David Park"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Grisha Tigranyan</h3>
+            <p class="text-gray-500 text-sm">@tig_grisha</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">
+          The Notebook is really worth it. I prefer reading the book 1000 times than watching the
+          movie...
+        </p>
+      </div>
+
+      <div
+        class="flex flex-col bg-gradient-to-b from-gray-200/50 to-gray-200/10 p-6 rounded-lg max-w-xs flex-shrink-0 hover:from-gray-200/60 hover:to-gray-200/20 transition-colors"
+      >
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="assets/avatars/agua.jpeg"
+            class="w-12 h-12 rounded-full object-cover object-center"
+            alt="Sofia Rodriguez"
+          />
+          <div class="text-left">
+            <h3 class="font-semibold text-md">Felipe Moraes</h3>
+            <p class="text-gray-500 text-sm">@moraes_felipe</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm">
+          I was able to borrow all the books I needed for my classes this semester. It looks like
+          this library has all possible books ahahahhaha!
+        </p>
+      </div>
+    </div>
+
+    <!-- Gradient overlays -->
+    <div
+      class="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-gray-50 pointer-events-none"
+    ></div>
+    <div
+      class="absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-gray-50 pointer-events-none"
+    ></div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="p-6 max-w-6xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6 text-gray-800">My Loans</h1>
+
+  <!-- Error -->
+  <div *ngIf="error" class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+    {{ error }}
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-gray-500">Loading...</div>
+
+  <!-- Loans Table -->
+  <div *ngIf="!loading && loans.length > 0" class="overflow-x-auto">
+    <table class="min-w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-100 text-gray-600 text-left text-sm uppercase tracking-wide border-b">
+          <th class="py-3 px-4">Title</th>
+          <th class="py-3 px-4">Author</th>
+          <th class="py-3 px-4">Borrowed On</th>
+          <th class="py-3 px-4">Due Date</th>
+          <th class="py-3 px-4 items-center">
+            Simulate a <br />
+            Return Date:
+          </th>
+          <th class="py-3 px-4">Fine</th>
+          <!-- <th class="py-3 px-4">Action</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of loans" class="border-b hover:bg-gray-50">
+          <td class="py-3 px-4 font-medium">{{ loan.Title }}</td>
+          <td class="py-3 px-4">{{ loan.Author }}</td>
+          <td class="py-3 px-4">{{ loan.BorrowDate }}</td>
+          <td class="py-3 px-4 font-semibold text-red-600">{{ loan.DueDate }}</td>
+
+          <td class="py-3 px-4">
+            <input
+              type="date"
+              class="border p-1 rounded"
+              [(ngModel)]="loan.returnOn"
+              (change)="updateFine(loan)"
+              [min]="loan.DueDate"
+            />
+          </td>
+
+          <td class="py-3 px-4 font-semibold">
+            <span *ngIf="loan.predictedFine > 0" class="text-red-600">
+              ${{ loan.predictedFine.toFixed(2) }}
+            </span>
+            <span *ngIf="loan.predictedFine === 0">—</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Loans Message -->
+  <div *ngIf="!loading && loans.length === 0 && !error" class="text-gray-500 py-6 text-center">
+    You have no books currently on loan.
+  </div>
+</div>
