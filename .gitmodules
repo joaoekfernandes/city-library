@@ -1,0 +1,3 @@
+[submodule "city-library-backend"]
+	path = city-library-backend
+	url = https://github.com/joaoekfernandes/city-library-backend
